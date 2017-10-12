@@ -1,8 +1,8 @@
 # Midterm IoT Project
 
-Name:  
+Name:  Camila Vargas Restrepo
 
-Date:
+Date: October 12, 2017
 
 ## Project: "Brand Name" or Device Name
 
