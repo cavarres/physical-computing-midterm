@@ -20,7 +20,9 @@ To express and engage with some of these ideas, I chose to focus on an abstract 
 The project has multiple layers:
 
 **Behavioral conditioning:** the clock’s numbers have been flipped in order to play with people’s perceptions and assumptions about the ways in which we represent abstract concepts. Through the widespread use of clocks (although it is debatable whether new generations will see analog clocks the same way) we have been conditioned to understand certain hand arrangements to mean specific things. A 90º angle with the long hand pointing upwards and the short hand pointing right is easily associated with 3:00. However, in my clock, this means 9:00. The idea is that the inversion will make the audience pause and reflect on the arbitrariness of the conventions used to measure and indicate time. 
+
 **Measurement metaphor:** the increasing interest to measure, quantify, and visualize energy parallels the need to save it and make better use of it. I wanted to address this issue by creating an analogy with time. As time became an indispensable resource (“time is money”) we became increasingly interested in quantifying it and visualizing it in order to control it. (This episode of Radiolab served as inspiration: http://www.radiolab.org/story/91585-unlocking-the-secrets-of-time/). 
+
 The paradox is that the more we pay attention to time, the faster it appears to pass (think about the speeding up of time in modernity). This is why, the “Watch-ing” clock moves counterclockwise (so time moves forward in the clock since it’s flipped) when people are looking at it (the action of looking is symbolized through the button that looks like an eye). When people are not looking at it, the clock moves clockwise (that is backwards in this clock). This is supposed to allude to the consequences of measuring, quantifying and materializing abstract concepts. 
 
 **Finished Enclosure:**
@@ -38,11 +40,11 @@ Overview of the technical operation of my device, including:
 ![Wiring Diagram](WiringDiagram.png)
 
 **List of Hardware Used**
-⋅⋅* Half+ breadboard
-⋅⋅* SparkFun Photon Redboard
-⋅⋅* Momentary Pushbutton Switch - 12mm Square
-⋅⋅* Servo - Generic motor
-⋅⋅* Mini Piezo Speaker 
+⋅⋅⋅ Half+ breadboard
+⋅⋅⋅ SparkFun Photon Redboard
+⋅⋅⋅ Momentary Pushbutton Switch - 12mm Square
+⋅⋅⋅ Servo - Generic motor
+⋅⋅⋅ Mini Piezo Speaker 
 
 ** Explanation of my code **
 
