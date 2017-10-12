@@ -34,8 +34,8 @@ The paradox is that the more we pay attention to time, the faster it appears to 
 ![Enclosure with electronics exposed](exposed_enclosure.jpg)
 
 ### Technical Details
-//   
-Overview of the technical operation of my device, including:
+
+Overview of the technical operation of my device. 
 
 **Wiring diagram** 
 ![Wiring Diagram](WiringDiagram.png)
@@ -55,7 +55,7 @@ Put simply my code does the following:
    c. communicate message to Rob
    d. listen for Rob's message and sound an alarm when appropriate
 
-For a. and b., in each iteration of the loop there's a reading of the button input which leads to the servo moving either clockwise or counterclockwise. The position starts at 90 and it is updated by adding 6 degrees (360/60) or substracting 6 degrees every second (delay (1000)). 
+For a. and b., in each iteration of the loop there's a reading of the button input which leads to the servo moving either clockwise or counterclockwise. The servo starts at `position = 90`, which is technically the middle point of the motor's maximum rotation. The servo's position is updated by adding 6 degrees (360/60) or substracting 6 degrees every second `delay (1000)`. 
 
 ```
   int position = 90;
@@ -80,13 +80,13 @@ For a. and b., in each iteration of the loop there's a reading of the button inp
   }
 ```
 
-For c. and d. We first subscribe inside void setup()
+For c. and d. we first subscribe to `rob-camila` inside void setup()
 
 ```
  Particle.subscribe("rob-camila", lowMoisture); // set up function to connect to Rob
 ```
 
-On one hand, Rob communicated with my clock. The function lowMoisture triggers an alarm in my clock whenever the message hour is transmitted.
+On one hand, Rob communicates with my clock. The function `lowMoisture` triggers a tone in the Piezo speaker whenever the message "hour" is transmitted.
 
 ```
 void lowMoisture(const char *event, const char *data){
@@ -95,7 +95,7 @@ void lowMoisture(const char *event, const char *data){
         tone(ALARM_PIN, 523, 2000);}
 }
 ```
-On the other hand, if the person has spent a long time (proxy is 20s in this prototype) looking at the clock, this triggers a "Great Day!" message. This is then displayed in Rob's device. 
+On the other hand, if a person has spent a long time looking at my "Watch-ing" clock  (proxy is pressing the button for 20s in this prototype), it will trigger a "Great Day!" message. This is then displayed in Rob's device. 
 
 ```
 if (countsec == 20){ // if button has been pressed for 20 seconds, publish that it's been a great day. 
