@@ -40,23 +40,69 @@ Overview of the technical operation of my device, including:
 ![Wiring Diagram](WiringDiagram.png)
 
 **List of Hardware Used**
-⋅⋅⋅ Half+ breadboard
-⋅⋅⋅ SparkFun Photon Redboard
-⋅⋅⋅ Momentary Pushbutton Switch - 12mm Square
-⋅⋅⋅ Servo - Generic motor
-⋅⋅⋅ Mini Piezo Speaker 
+* Half+ breadboard
+* SparkFun Photon Redboard
+* Momentary Pushbutton Switch - 12mm Square
+* Servo - Generic motor
+* Mini Piezo Speaker 
 
 ** Explanation of my code **
 
-* Link to code   
+Put simply my code does the following: 
+   a. if button pressed (proxy for looking) move counterclockwise.
+   b. if button not pressed move clockwise. 
+   c. communicate message to Rob
+   d. listen for Rob's message and sound an alarm when appropriate
 
-//
-
-You can include code snippets here:
+For a. and b., in each iteration of the loop there's a reading of the button input which leads to the servo moving either clockwise or counterclockwise. 
 
 ```
-Particle.subscribe("Execute", messageParse, MY_DEVICES);
+  press1 = digitalRead(button1);
+ 
+  if(press1 == LOW){ // when button not pressed, move clockwise
+    position += 2;
+    myservo.write(position);                 
+    delay(1000);
+    Serial.println(position);
+    Serial.print("LOW");
+    countsec == 0; // reset counsec to 0
+  } 
+    
+  else { // when button  pressed, move counter-clockwise
+  	position -= 2; 
+    myservo.write(position);                 
+    delay(1000);
+    Serial.println(position);
+    Serial.print("HIGH");
+    countsec += 1; //start counting seconds since button was pressed
+  }
 ```
 
-but also link to your project's full code in this repository:  [photon.ino](photon.ino)
+For c. and d. We first subscribe inside void setup()
+
+```
+ Particle.subscribe("rob-camila", lowMoisture); // set up function to connect to Rob
+```
+
+On one hand, Rob communicated with my clock. The function lowMoisture triggers an alarm in my clock whenever the message hour is transmitted.
+
+```
+void lowMoisture(const char *event, const char *data){
+    String message = data;
+    if (message == "hour"){
+        tone(ALARM_PIN, 523, 2000);}
+}
+```
+On the other hand, if the person has spent a long time (proxy is 20s in this prototype) looking at the clock, this triggers a "Great Day!" message. This is then displayed in Rob's device. 
+
+```
+if (countsec == 20){ // if button has been pressed for 20 seconds, publish that it's been a great day. 
+      Particle.publish("rob-camila", "Great Day!");
+      countsec == 0;
+  }
+```
+  
+
+
+Link to my project's full code in this repository:  [photon.ino](photon.ino)
 
