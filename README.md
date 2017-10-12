@@ -36,7 +36,8 @@ The paradox is that the more we pay attention to time, the faster it appears to 
 ### Technical Details
 //   
 Overview of the technical operation of my device, including:
-** Wiring diagram** 
+
+**Wiring diagram** 
 ![Wiring Diagram](WiringDiagram.png)
 
 **List of Hardware Used**
@@ -46,7 +47,7 @@ Overview of the technical operation of my device, including:
 * Servo - Generic motor
 * Mini Piezo Speaker 
 
-** Explanation of my code **
+**Explanation of my code**
 
 Put simply my code does the following: 
    a. if button pressed (proxy for looking) move counterclockwise.
@@ -54,13 +55,14 @@ Put simply my code does the following:
    c. communicate message to Rob
    d. listen for Rob's message and sound an alarm when appropriate
 
-For a. and b., in each iteration of the loop there's a reading of the button input which leads to the servo moving either clockwise or counterclockwise. 
+For a. and b., in each iteration of the loop there's a reading of the button input which leads to the servo moving either clockwise or counterclockwise. The position starts at 90 and it is updated by adding 6 degrees (360/60) or substracting 6 degrees every second (delay (1000)). 
 
 ```
+  int position = 90;
   press1 = digitalRead(button1);
  
   if(press1 == LOW){ // when button not pressed, move clockwise
-    position += 2;
+    position += 6;
     myservo.write(position);                 
     delay(1000);
     Serial.println(position);
@@ -69,7 +71,7 @@ For a. and b., in each iteration of the loop there's a reading of the button inp
   } 
     
   else { // when button  pressed, move counter-clockwise
-  	position -= 2; 
+  	position -= 6; 
     myservo.write(position);                 
     delay(1000);
     Serial.println(position);
